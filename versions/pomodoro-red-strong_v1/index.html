@@ -1,0 +1,91 @@
+<!-- Usage: open this red strong version in a browser, or run `python3 -m http.server 4175` from this folder and visit http://127.0.0.1:4175/. -->
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Red Strong 番茄鐘</title>
+    <link rel="icon" href="assets/tomato.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar" aria-label="Red Strong 番茄鐘工具列">
+        <a class="brand" href="index.html" aria-label="番茄鐘首頁">
+          <img src="assets/tomato.svg" alt="" />
+          <strong>番茄鐘</strong>
+          <span class="divider" aria-hidden="true"></span>
+          <span>Sean</span>
+        </a>
+        <button class="icon-button" type="button" aria-label="設定">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 15.2A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4Z" />
+            <path d="M19 14.2c.1.5.4.9.8 1.2l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1c-.4-.4-.9-.6-1.4-.5-.5.2-.9.5-1.1 1V19a2 2 0 0 1-4 0v-.2c-.2-.5-.6-.8-1.1-1-.5-.1-1 .1-1.4.5l-.1.1a2 2 0 0 1-2.8-2.8l.1-.1c.4-.3.7-.7.8-1.2-.1-.5-.4-.9-.8-1.1H5a2 2 0 0 1 0-4h.2c.5-.2.8-.6.8-1.1-.1-.5-.4-.9-.8-1.3l-.1-.1a2 2 0 0 1 2.8-2.8l.1.1c.4.4.9.6 1.4.5.5-.2.9-.5 1.1-1V3a2 2 0 0 1 4 0v.2c.2.5.6.8 1.1 1 .5.1 1-.1 1.4-.5l.1-.1a2 2 0 0 1 2.8 2.8l-.1.1c-.4.4-.7.8-.8 1.3.1.5.4.9.8 1.1h.2a2 2 0 0 1 0 4h-.2c-.4.2-.7.6-.8 1.1Z" />
+          </svg>
+        </button>
+      </header>
+
+      <section class="layout" aria-label="番茄鐘工作區">
+        <aside class="left-panel" aria-label="今日進度">
+          <section class="done-card">
+            <h1>今天完成</h1>
+            <p class="count"><strong id="sessionCount">2</strong><span>/ 8</span></p>
+            <p class="unit">個番茄</p>
+            <div class="tomato-row" id="tomatoRow" aria-label="今日 8 顆番茄進度"></div>
+            <div class="dot-row" id="dotRow" aria-hidden="true"></div>
+          </section>
+
+          <section class="time-list" aria-label="時間設定">
+            <label>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+              <span>專注時間</span>
+              <input id="focusMinutes" type="number" min="1" max="120" value="25" />
+              <em>分鐘</em>
+            </label>
+            <label>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c9-1 13-6 14-14-8 1-13 5-14 14Z" /><path d="M5 19c4-5 8-8 14-14" /></svg>
+              <span>短休息</span>
+              <input id="shortMinutes" type="number" min="1" max="60" value="10" />
+              <em>分鐘</em>
+            </label>
+            <label>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M6 9l6-6 6 6M5 15h14M7 21h10" /></svg>
+              <span>長休息</span>
+              <input id="longMinutes" type="number" min="0" max="90" value="0" />
+              <em>分鐘</em>
+            </label>
+          </section>
+        </aside>
+
+        <section class="timer-panel" aria-label="計時器">
+          <button class="timer-ring" id="toggleButton" type="button" aria-label="開始或暫停">
+            <span class="progress-track"></span>
+            <span class="progress-fill" id="progressFill"></span>
+            <span class="progress-knob" id="progressKnob"></span>
+            <img class="timer-tomato" src="assets/tomato.svg" alt="" />
+            <time id="timeDisplay" datetime="PT25M">25:00</time>
+            <span class="mode-pill" id="modeLabel">專注</span>
+          </button>
+
+          <div class="mode-switch" role="tablist" aria-label="模式">
+            <button class="mode-tab is-active" type="button" data-mode="focus" role="tab" aria-selected="true">專注</button>
+            <button class="mode-tab" type="button" data-mode="short" role="tab" aria-selected="false">短休息</button>
+            <button class="mode-tab" type="button" data-mode="long" role="tab" aria-selected="false">長休息</button>
+          </div>
+        </section>
+
+        <aside class="right-panel" aria-label="專注清單">
+          <h2>專注清單</h2>
+          <form class="task-form" id="taskForm">
+            <label class="visually-hidden" for="taskInput">新增專注事項</label>
+            <input id="taskInput" type="text" maxlength="80" placeholder="新增專注事項" autocomplete="off" />
+            <button type="submit">新增</button>
+          </form>
+          <ul class="focus-list" id="taskList"></ul>
+        </aside>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

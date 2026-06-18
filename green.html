@@ -1,0 +1,105 @@
+<!-- Usage: open this version in a browser, or run `python3 -m http.server 4173` from this folder and visit http://127.0.0.1:4173/. -->
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>綠意番茄鐘</title>
+    <link rel="icon" href="assets/green-leaf.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="green.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar" aria-label="綠意番茄鐘工具列">
+        <a class="brand" href="index.html" aria-label="綠意番茄鐘首頁">
+          <img class="brand-mark" src="assets/green-leaf.svg" alt="" />
+          <span>綠意番茄鐘</span>
+        </a>
+        <div class="topbar-status" aria-live="polite">
+          <span id="topbarMode">專注</span>
+          <strong id="topbarTime">25:00</strong>
+        </div>
+      </header>
+
+      <section class="workspace" aria-label="綠意番茄鐘工作區">
+        <aside class="panel progress-panel" aria-label="今日進度">
+          <div>
+            <p class="panel-label">今天完成</p>
+            <div class="tomato-count">
+              <strong id="sessionCount">0</strong>
+              <span>顆番茄</span>
+            </div>
+          </div>
+          <div class="mini-goal" aria-label="四顆番茄循環">
+            <span class="goal-dot" data-dot="0"></span>
+            <span class="goal-dot" data-dot="1"></span>
+            <span class="goal-dot" data-dot="2"></span>
+            <span class="goal-dot" data-dot="3"></span>
+          </div>
+          <p class="quiet-copy">循環進度</p>
+        </aside>
+
+        <section class="timer-panel" aria-label="計時器">
+          <div class="mode-tabs" role="tablist" aria-label="模式">
+            <button class="mode-tab is-active" type="button" data-mode="focus" role="tab" aria-selected="true">
+              專注
+            </button>
+            <button class="mode-tab" type="button" data-mode="short" role="tab" aria-selected="false">
+              短休息
+            </button>
+            <button class="mode-tab" type="button" data-mode="long" role="tab" aria-selected="false">
+              長休息
+            </button>
+          </div>
+
+          <div class="timer-orbit" aria-label="剩餘時間">
+            <div class="progress-ring" id="progressRing">
+              <img class="timer-tomato" src="assets/green-leaf.svg" alt="" />
+              <div class="time-stack">
+                <p id="modeLabel">專注</p>
+                <time id="timeDisplay" datetime="PT25M">25:00</time>
+              </div>
+            </div>
+          </div>
+
+          <div class="timer-actions" aria-label="計時控制">
+            <button class="primary-action" id="toggleButton" type="button">開始</button>
+            <button class="secondary-action" id="resetButton" type="button">重設</button>
+          </div>
+
+          <div class="settings-strip" aria-label="時間設定">
+            <label>
+              專注
+              <input id="focusMinutes" type="number" min="1" max="120" value="25" />
+            </label>
+            <label>
+              短休息
+              <input id="shortMinutes" type="number" min="1" max="60" value="5" />
+            </label>
+            <label>
+              長休息
+              <input id="longMinutes" type="number" min="1" max="90" value="15" />
+            </label>
+          </div>
+        </section>
+
+        <aside class="panel tasks-panel" aria-label="任務清單">
+          <div class="current-task">
+            <p class="panel-label">目前任務</p>
+            <strong id="currentTask">還沒選任務</strong>
+          </div>
+
+          <form class="task-form" id="taskForm">
+            <label class="visually-hidden" for="taskInput">新增任務</label>
+            <input id="taskInput" type="text" maxlength="80" placeholder="輸入下一個任務" autocomplete="off" />
+            <button type="submit">新增</button>
+          </form>
+
+          <ul class="task-list" id="taskList" aria-label="待辦任務"></ul>
+        </aside>
+      </section>
+    </main>
+
+    <script src="green.js"></script>
+  </body>
+</html>

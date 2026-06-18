@@ -1,0 +1,31 @@
+<!-- Usage: red Pomodoro tomato icon; embed with <img src="assets/tomato.svg" alt="">. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Tomato</title>
+  <desc id="desc">A red tomato icon with green leaves.</desc>
+  <defs>
+    <radialGradient id="body" cx="37%" cy="29%" r="72%">
+      <stop offset="0" stop-color="#ff7969" />
+      <stop offset="0.54" stop-color="#ec3f31" />
+      <stop offset="1" stop-color="#bf2a22" />
+    </radialGradient>
+    <linearGradient id="leaf" x1="45" y1="18" x2="108" y2="72" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#72a84d" />
+      <stop offset="1" stop-color="#2f6c3a" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="148%">
+      <feDropShadow dx="0" dy="7" stdDeviation="5" flood-color="#9b241e" flood-opacity="0.24" />
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <path
+      d="M119 58c21 13 25 44 10 65-16 22-58 23-82 6-24-18-27-54-7-72 12-10 25-9 36-6 13-7 30-6 43 7Z"
+      fill="url(#body)"
+    />
+    <path
+      d="M82 47c-8-13-19-17-32-15 8 6 12 11 14 18-11-6-23-7-36-1 13 4 21 9 25 16-12 2-21 8-27 18 12-5 23-5 35-1 9 4 18 4 28 1 9-3 17-8 22-17 6-10 16-16 28-20-13-5-24-3-34 4 2-9 7-17 15-24-15 1-28 8-38 21Z"
+      fill="url(#leaf)"
+    />
+    <path d="M49 78c-6 10-6 23 0 33" fill="none" stroke="#ff9b91" stroke-linecap="round" stroke-width="7" opacity=".58" />
+    <circle cx="63" cy="67" r="6" fill="#ff8b7e" opacity=".7" />
+  </g>
+</svg>

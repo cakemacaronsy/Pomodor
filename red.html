@@ -1,0 +1,180 @@
+<!-- Usage: open this separate red version in a browser, or run `python3 -m http.server 4173` and visit http://127.0.0.1:4173/red.html. -->
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>紅色番茄時鐘</title>
+    <link rel="icon" href="assets/tomato.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="red.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header" aria-label="番茄時鐘工具列">
+        <a class="brand" href="index.html" aria-label="番茄時鐘首頁">
+          <img class="brand-mark" src="assets/tomato.svg" alt="" />
+          <span>番茄時鐘</span>
+        </a>
+        <nav class="header-actions" aria-label="工具">
+          <button type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20V7" /></svg>
+            統計
+          </button>
+          <button type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8a3.5 3.5 0 0 0 0 7.5Z" /><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.1 2.1 0 0 1-2.98 2.98l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21a2.1 2.1 0 0 1-4.2 0v-.06a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.1 2.1 0 0 1-2.98-2.98l.04-.04A1.8 1.8 0 0 0 3.8 15a1.8 1.8 0 0 0-1.66-1.1H2a2.1 2.1 0 0 1 0-4.2h.06A1.8 1.8 0 0 0 3.72 8.6a1.8 1.8 0 0 0-.36-1.98l-.04-.04A2.1 2.1 0 0 1 6.3 3.6l.04.04a1.8 1.8 0 0 0 1.98.36A1.8 1.8 0 0 0 9.42 2.34V2a2.1 2.1 0 0 1 4.2 0v.06a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.1 2.1 0 0 1 2.98 2.98l-.04.04a1.8 1.8 0 0 0-.36 1.98 1.8 1.8 0 0 0 1.66 1.1H21a2.1 2.1 0 0 1 0 4.2h-.06A1.8 1.8 0 0 0 19.4 15Z" /></svg>
+            設定
+          </button>
+          <button type="button" id="themeButton" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.8 6.8 0 0 0 9.8 9.8Z" /></svg>
+            <span id="themeLabel">深色模式</span>
+          </button>
+        </nav>
+      </header>
+
+      <section class="workspace" aria-label="番茄時鐘工作區">
+        <aside class="task-column" aria-label="工作清單">
+          <h2>工作清單</h2>
+          <form class="task-form" id="taskForm">
+            <label class="visually-hidden" for="taskInput">新增任務</label>
+            <input id="taskInput" type="text" maxlength="80" placeholder="新增任務..." autocomplete="off" />
+            <button type="submit" aria-label="新增任務">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+            </button>
+          </form>
+
+          <div class="task-tabs" role="tablist" aria-label="任務篩選">
+            <button class="is-active" type="button" data-filter="all">全部 <span id="allCount">0</span></button>
+            <button type="button" data-filter="today">今日</button>
+            <button type="button" data-filter="active">進行中 <span id="activeCount">0</span></button>
+            <button type="button" data-filter="done">已完成</button>
+          </div>
+
+          <ul class="task-list" id="taskList" aria-label="待辦任務"></ul>
+        </aside>
+
+        <section class="timer-column" aria-label="計時器">
+          <div class="mode-tabs" role="tablist" aria-label="模式">
+            <button class="mode-tab is-active" type="button" data-mode="focus" role="tab" aria-selected="true">專注</button>
+            <button class="mode-tab" type="button" data-mode="short" role="tab" aria-selected="false">短休息</button>
+            <button class="mode-tab" type="button" data-mode="long" role="tab" aria-selected="false">長休息</button>
+          </div>
+
+          <p class="focus-note">
+            <img src="assets/tomato.svg" alt="" />
+            專注於當下，完成這個番茄鐘！
+          </p>
+
+          <div class="timer-orbit" aria-label="剩餘時間">
+            <div class="progress-ring" id="progressRing">
+              <span class="tick tick-0"></span>
+              <span class="tick tick-1"></span>
+              <span class="tick tick-2"></span>
+              <span class="tick tick-3"></span>
+              <span class="tick tick-4"></span>
+              <span class="tick tick-5"></span>
+              <span class="tick tick-6"></span>
+              <span class="tick tick-7"></span>
+              <span class="tick tick-8"></span>
+              <span class="tick tick-9"></span>
+              <span class="tick tick-10"></span>
+              <span class="tick tick-11"></span>
+              <img class="timer-tomato" src="assets/tomato.svg" alt="" />
+              <div class="time-stack">
+                <time id="timeDisplay" datetime="PT25M">25:00</time>
+                <p id="modeLabel">專注時間</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="cycle-status">
+            <p>第 <span id="cycleNumber">1</span> 個番茄鐘（共 4 個）</p>
+            <div class="cycle-dots" aria-label="四個番茄循環">
+              <span class="cycle-dot is-filled" data-dot="0"></span>
+              <span class="cycle-dot" data-dot="1"></span>
+              <span class="cycle-dot" data-dot="2"></span>
+              <span class="cycle-dot" data-dot="3"></span>
+            </div>
+          </div>
+
+          <div class="timer-actions" aria-label="計時控制">
+            <button class="secondary-action" id="resetButton" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v6h6M20 20v-6h-6M5.2 15A7.8 7.8 0 0 0 18 18.1M18.8 9A7.8 7.8 0 0 0 6 5.9" /></svg>
+              重設
+            </button>
+            <button class="primary-action" id="toggleButton" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path id="toggleIcon" d="M8 5v14l11-7Z" /></svg>
+              <span>開始</span>
+            </button>
+            <button class="secondary-action" id="pauseButton" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h3v14H8zM15 5h3v14h-3z" /></svg>
+              暫停
+            </button>
+          </div>
+        </section>
+
+        <aside class="settings-column" aria-label="設定與統計">
+          <section class="side-section">
+            <h2>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v6l4 2" /><circle cx="12" cy="12" r="9" /></svg>
+              時間設定
+            </h2>
+            <form class="settings-form" id="settingsForm">
+              <label>
+                <span class="legend-dot red"></span>
+                專注時間
+                <input id="focusMinutes" type="number" min="1" max="120" value="25" />
+                <span>分</span>
+              </label>
+              <label>
+                <span class="legend-dot green"></span>
+                短休息時間
+                <input id="shortMinutes" type="number" min="1" max="60" value="5" />
+                <span>分</span>
+              </label>
+              <label>
+                <span class="legend-dot blue"></span>
+                長休息時間
+                <input id="longMinutes" type="number" min="1" max="90" value="15" />
+                <span>分</span>
+              </label>
+            </form>
+            <button class="text-action" id="resetDefaults" type="button">重設為預設值</button>
+          </section>
+
+          <section class="side-section">
+            <h2>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20V7" /></svg>
+              今日狀態
+            </h2>
+            <div class="stats-card">
+              <div class="stats-main">
+                <img src="assets/tomato.svg" alt="" />
+                <div>
+                  <span>已完成番茄鐘</span>
+                  <strong><span id="sessionCount">0</span><small>個</small></strong>
+                </div>
+              </div>
+              <dl>
+                <div>
+                  <dt>專注時間</dt>
+                  <dd id="focusTotal">0 分鐘</dd>
+                </div>
+                <div>
+                  <dt>長休息</dt>
+                  <dd id="longBreakCount">0 次</dd>
+                </div>
+              </dl>
+            </div>
+          </section>
+
+          <section class="tip-card">
+            <h2>小提示</h2>
+            <p>專注 25 分鐘，休息一下，你可以走得更遠。</p>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script src="red.js"></script>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+# Usage: keeps local machine files and preview artifacts out of the GitHub project.
+.DS_Store
+.playwright-cli/
+plugin/

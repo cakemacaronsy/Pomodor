@@ -1,0 +1,65 @@
+<!-- Usage: pet mascot asset inspired by the supplied suited reference image; embed with <img src="assets/seansuit-pet_v1.svg" alt="SeanSuit pet">. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">SeanSuit pet</title>
+  <desc id="desc">A small confident mascot pet in a green suit, black shirt, and silver tie, standing with arms on hips.</desc>
+  <defs>
+    <linearGradient id="suit" x1="92" y1="126" x2="230" y2="292" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5bb86f" />
+      <stop offset="0.58" stop-color="#2f8a4d" />
+      <stop offset="1" stop-color="#174f31" />
+    </linearGradient>
+    <linearGradient id="shirt" x1="147" y1="128" x2="175" y2="254" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#112b1c" />
+      <stop offset="1" stop-color="#07150d" />
+    </linearGradient>
+    <linearGradient id="tie" x1="154" y1="124" x2="179" y2="232" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f0fff4" />
+      <stop offset="0.42" stop-color="#c7f3d0" />
+      <stop offset="1" stop-color="#72cf82" />
+    </linearGradient>
+    <radialGradient id="face" cx="47%" cy="34%" r="68%">
+      <stop offset="0" stop-color="#f0c0a2" />
+      <stop offset="0.67" stop-color="#c98768" />
+      <stop offset="1" stop-color="#9e614b" />
+    </radialGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#12351f" flood-opacity="0.2" />
+    </filter>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <ellipse cx="160" cy="286" rx="68" ry="10" fill="#c8dfc1" opacity="0.38" />
+
+    <path
+      d="M104 152c13-20 34-29 56-29s43 9 56 29c13 20 16 74 8 110-5 22-26 34-64 34s-59-12-64-34c-8-36-5-90 8-110Z"
+      fill="url(#suit)"
+    />
+    <path d="M133 132h54l20 148c-12 8-27 12-47 12s-35-4-47-12l20-148Z" fill="url(#shirt)" />
+    <path d="M143 133l17 26 17-26 18 20-20 46h-30l-20-46 18-20Z" fill="#2f8a4d" />
+    <path d="M154 143h13l10 92-17 29-17-29 11-92Z" fill="url(#tie)" />
+    <path d="M152 141h16l6 15-14 12-14-12 6-15Z" fill="#e6f8ea" />
+
+    <path d="M105 166c-22 15-34 42-34 69 0 13 7 22 18 22 10 0 15-7 16-17 2-22 9-39 22-50Z" fill="#1f6d3b" />
+    <path d="M215 166c22 15 34 42 34 69 0 13-7 22-18 22-10 0-15-7-16-17-2-22-9-39-22-50Z" fill="#1f6d3b" />
+    <path d="M85 242c3-12 12-19 24-20 8 10 8 22 0 34-12 4-21 0-24-14Z" fill="#c98768" />
+    <path d="M235 242c-3-12-12-19-24-20-8 10-8 22 0 34 12 4 21 0 24-14Z" fill="#c98768" />
+
+    <path d="M121 274c-10 6-17 16-18 27h47c0-13-7-23-18-31Z" fill="#102918" />
+    <path d="M199 274c10 6 17 16 18 27h-47c0-13 7-23 18-31Z" fill="#102918" />
+
+    <path d="M111 78c0-36 19-58 49-58s49 22 49 58c0 43-20 71-49 71s-49-28-49-71Z" fill="url(#face)" />
+    <path d="M113 70c3-34 23-54 50-54 27 1 46 20 45 54-20-10-63-11-95 0Z" fill="#151821" />
+    <path d="M118 73c7-23 25-35 48-36 18-1 31 8 40 25-24-10-51-7-88 11Z" fill="#23252b" opacity="0.82" />
+    <path d="M132 82c9-5 18-5 27 0" fill="none" stroke="#2e1e1b" stroke-linecap="round" stroke-width="5" />
+    <path d="M164 82c9-5 18-5 27 0" fill="none" stroke="#2e1e1b" stroke-linecap="round" stroke-width="5" />
+    <ellipse cx="145" cy="98" rx="5" ry="6" fill="#1a1618" />
+    <ellipse cx="176" cy="98" rx="5" ry="6" fill="#1a1618" />
+    <path d="M155 110c2 3 6 4 10 0" fill="none" stroke="#7e4c40" stroke-linecap="round" stroke-width="4" />
+    <path d="M145 124c9 5 22 5 31 0" fill="none" stroke="#3d2322" stroke-linecap="round" stroke-width="4" />
+
+    <circle cx="104" cy="88" r="10" fill="#2f8a4d" />
+    <circle cx="216" cy="88" r="10" fill="#2f8a4d" />
+    <rect x="96" y="83" width="7" height="24" rx="3.5" fill="#174f31" />
+    <rect x="217" y="83" width="7" height="24" rx="3.5" fill="#174f31" />
+  </g>
+</svg>
